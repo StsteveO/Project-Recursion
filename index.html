@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Merge-Sort Recursion</title>
+  </head>
+  <body>
+    <script>
+      function merge(left, right) {
+        let solutionArr = [];
+        let leftPointer = 0;
+        let rightPointer = 0;
+        let solutionIndex = 0;
+
+        while (leftPointer < left.length && rightPointer < right.length) {
+          if (left[leftPointer] < right[rightPointer]) {
+            solutionArr[solutionIndex] = left[leftPointer];
+            leftPointer++;
+          } else {
+            solutionArr[solutionIndex] = right[rightPointer];
+            rightPointer++;
+          }
+          solutionIndex++;
+        }
+        while (leftPointer < left.length) {
+          solutionArr[solutionIndex] = left[leftPointer];
+          leftPointer++;
+          solutionIndex++;
+        }
+        while (rightPointer < right.length) {
+          solutionArr[solutionIndex] = right[rightPointer];
+          rightPointer++;
+          solutionIndex++;
+        }
+
+        return solutionArr;
+      }
+      function mergeSort(arr = [], start = 0, end = arr.length) {
+        if (end - start <= 1) {
+          return arr;
+        } else {
+          let middle = Math.round((end + start) / 2);
+          let leftSide = arr.slice(start, middle);
+          let rightSide = arr.slice(middle, end);
+          return merge(mergeSort(leftSide), mergeSort(rightSide));
+        }
+      }
+
+      //console.log(mergeSort([8, 3, 4, 12, 5, 6])); //3,4,5,6,8,12
+      //console.log(mergeSort([10, 2, -5, 6, -8, 2, 3, -1, 22]));
+    </script>
+  </body>
+</html>
